@@ -1,0 +1,23 @@
+# Networks
+
+## Supported networks
+
+All networks listed on the [Conduit Hub](https://hub.conduit.xyz) or configured as discoverable are automatically supported. This includes 59+ networks such as Zora, Mode, BOB, Derive, and many more.
+
+For more on Conduit's RPC infrastructure, see the [Conduit RPC Nodes docs](https://docs.conduit.xyz/rpc-nodes/overview).
+
+## Route format
+
+```
+POST https://mpp.conduit.xyz/:network-id
+```
+
+Where `:network-id` is the network's slug identifier. Examples:
+
+| Network | Route |
+|---------|-------|
+| Zora Mainnet | `/zora-mainnet-0` |
+| Mode Mainnet | `/mode-mainnet-0` |
+| BOB | `/bob-mainnet-0` |
+| Derive | `/derive-mainnet-0` |
+| Proof of Play Apex | `/proof-of-play-apex-mainnet-0` |
