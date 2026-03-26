@@ -27,19 +27,23 @@ After the first request, every subsequent request is just a signed voucher -- no
 
 When done, call `session.close()` to settle on-chain. The server keeps the owed amount, and the unused deposit is refunded.
 
+## Discovery
+
+The gateway serves built-in discovery endpoints at `/discover` and `/llms.txt`. See [discovery](discovery.md) for details.
+
 ## Supported methods
 
 The proxy forwards any valid JSON-RPC request. All standard EVM methods are supported:
 
-| Method | Description |
-|--------|-------------|
-| `eth_chainId` | Get the chain ID |
-| `eth_blockNumber` | Get the latest block number |
-| `eth_getBalance` | Get an address's ETH balance |
-| `eth_getTransactionReceipt` | Get a transaction receipt |
-| `eth_call` | Call a contract read function |
-| `eth_getBlockByNumber` | Get a block by number |
-| `eth_getLogs` | Get event logs matching a filter |
-| `eth_estimateGas` | Estimate gas for a transaction |
-| `eth_getCode` | Get contract bytecode |
-| `eth_getTransactionCount` | Get an address's nonce |
+| Method                      | Description                      |
+| --------------------------- | -------------------------------- |
+| `eth_chainId`               | Get the chain ID                 |
+| `eth_blockNumber`           | Get the latest block number      |
+| `eth_getBalance`            | Get an address's ETH balance     |
+| `eth_getTransactionReceipt` | Get a transaction receipt        |
+| `eth_call`                  | Call a contract read function    |
+| `eth_getBlockByNumber`      | Get a block by number            |
+| `eth_getLogs`               | Get event logs matching a filter |
+| `eth_estimateGas`           | Estimate gas for a transaction   |
+| `eth_getCode`               | Get contract bytecode            |
+| `eth_getTransactionCount`   | Get an address's nonce           |

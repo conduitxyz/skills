@@ -6,6 +6,12 @@ All networks listed on the [Conduit Hub](https://hub.conduit.xyz) or configured 
 
 For more on Conduit's RPC infrastructure, see the [Conduit RPC Nodes docs](https://docs.conduit.xyz/rpc-nodes/overview).
 
+You can also discover available networks programmatically via the gateway's [discovery endpoints](discovery.md):
+
+```bash
+curl https://mpp.conduit.xyz/discover
+```
+
 ## Route format
 
 ```
@@ -14,10 +20,10 @@ POST https://mpp.conduit.xyz/:network-id
 
 Where `:network-id` is the network's slug identifier. Examples:
 
-| Network | Route |
-|---------|-------|
-| Zora Mainnet | `/zora-mainnet-0` |
-| Mode Mainnet | `/mode-mainnet-0` |
-| BOB | `/bob-mainnet-0` |
-| Derive | `/derive-mainnet-0` |
+| Network            | Route                           |
+| ------------------ | ------------------------------- |
+| Zora Mainnet       | `/zora-mainnet-0`               |
+| Mode Mainnet       | `/mode-mainnet-0`               |
+| BOB                | `/bob-mainnet-0`                |
+| Derive             | `/derive-mainnet-0`             |
 | Proof of Play Apex | `/proof-of-play-apex-mainnet-0` |

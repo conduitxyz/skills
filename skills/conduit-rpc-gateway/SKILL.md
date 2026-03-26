@@ -52,7 +52,18 @@ https://mpp.conduit.xyz
 | [payment](rules/payment.md)                   | Payment sessions, receipts, error handling               |
 | [making-requests](rules/making-requests.md)   | Making paid RPC calls with mppx SDK and CLI              |
 | [networks](rules/networks.md)                 | Available networks and how to find them                  |
+| [discovery](rules/discovery.md)               | Built-in discovery endpoints for agents and tools        |
 | [curl-workflow](rules/curl-workflow.md)       | Quick RPC calls via mppx CLI                             |
+
+## Discovery
+
+The gateway serves built-in [discovery endpoints](rules/discovery.md) so agents can find available networks and pricing without prior knowledge:
+
+```bash
+curl https://mpp.conduit.xyz/discover       # all services (JSON or markdown)
+curl https://mpp.conduit.xyz/llms.txt        # LLM-friendly overview
+curl https://mpp.conduit.xyz/discover/zora-mainnet-0  # single network details
+```
 
 ## API Reference
 
