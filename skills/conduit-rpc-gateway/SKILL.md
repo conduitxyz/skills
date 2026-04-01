@@ -60,9 +60,8 @@ https://mpp.conduit.xyz
 The gateway serves built-in [discovery endpoints](rules/discovery.md) so agents can find available networks and pricing without prior knowledge:
 
 ```bash
-curl https://mpp.conduit.xyz/discover       # all services (JSON or markdown)
-curl https://mpp.conduit.xyz/llms.txt        # LLM-friendly overview
-curl https://mpp.conduit.xyz/discover/zora-mainnet-0  # single network details
+curl https://mpp.conduit.xyz/openapi.json  # OpenAPI discovery document (machine-readable)
+curl https://mpp.conduit.xyz/llms.txt      # LLM-friendly overview
 ```
 
 ## API Reference

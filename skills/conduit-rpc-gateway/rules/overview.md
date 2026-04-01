@@ -29,7 +29,7 @@ When done, call `session.close()` to settle on-chain. The server keeps the owed 
 
 ## Discovery
 
-The gateway serves built-in discovery endpoints at `/discover` and `/llms.txt`. See [discovery](discovery.md) for details.
+The gateway serves built-in discovery endpoints at `/openapi.json` and `/llms.txt`. See [discovery](discovery.md) for details.
 
 ## Supported methods
 

@@ -9,7 +9,8 @@ For more on Conduit's RPC infrastructure, see the [Conduit RPC Nodes docs](https
 You can also discover available networks programmatically via the gateway's [discovery endpoints](discovery.md):
 
 ```bash
-curl https://mpp.conduit.xyz/discover
+curl https://mpp.conduit.xyz/openapi.json  # machine-readable OpenAPI document
+curl https://mpp.conduit.xyz/llms.txt      # LLM-friendly overview
 ```
 
 ## Route format
