@@ -1,0 +1,14 @@
+name: Snyk Agent Scan
+
+on:
+  pull_request:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uvx snyk-agent-scan@latest --skills skills/
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
