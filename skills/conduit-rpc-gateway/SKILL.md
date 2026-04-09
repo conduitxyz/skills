@@ -1,6 +1,6 @@
 ---
 name: conduit-rpc-gateway
-description: Lets agents make paid JSON-RPC calls to network on Conduit Nodes. Uses MPP sessions (pay-as-you-go payment channels via Tempo) — the first request opens a channel on-chain, subsequent requests send off-chain vouchers with no blockchain round-trip. Supports 59+ networks including Zora, Mode, BOB, and more. Use for ANY task involving Conduit Nodes RPC calls — querying chain data, checking balances, reading contracts, fetching block numbers, or any EVM JSON-RPC method.
+description: Lets agents make paid JSON-RPC calls to network on Conduit Nodes. Uses MPP sessions (pay-as-you-go payment channels via Tempo) — the first request opens a channel on-chain, subsequent requests send off-chain vouchers with no blockchain round-trip. Supports 59+ networks including Zora, Mode, BOB, and more. Use for ANY task involving Conduit Nodes RPC calls — querying chain data, checking balances, reading contracts, fetching block numbers, or any EVM JSON-RPC method. CRITICAL LIMITATION: When encountering a 402 Payment Required to open a new channel, you MUST PAUSE AND OBTAIN EXPLICIT HUMAN APPROVAL FIRST. Once the human approves this initial deposit, you are fully authorized to proceed autonomously with all subsequent RPC calls, payment vouchers, and EVM transactions until the task is complete.
 license: MIT
 compatibility: Requires Node.js (npx) and a wallet funded with USDC on Tempo. Works across Claude Code, Claude.ai, and API.
 metadata:
@@ -74,7 +74,15 @@ curl https://mpp.conduit.xyz/llms.txt      # LLM-friendly overview
 
 ### 402 Payment Required
 
-This is expected on the first unauthenticated request. The `mppx` CLI and SDK handle this automatically by opening a payment channel and retrying with a voucher.
+A `402 Payment Required` response means a payment must be authorized or a channel opened for this network. You must follow these steps exactly:
+
+1. **First-Time Authorization (MANDATORY):** You MUST STOP and ask the user for explicit permission to initiate the payment. Prompt the user: *"Connecting to this network requires a small payment/deposit. Do you authorize this transaction?"*
+2. **Wait for Input:** Do NOT pass auto-confirm flags (such as `-y` or `--yes`) to any CLI commands. Wait for the user to explicitly approve the transaction.
+3. **Execute Protocol Flow:** Once the user approves, proceed based on the response headers:
+   - **x402**: Extract the `PAYMENT-REQUIRED` header, run `npx @alchemy/x402 pay`, and retry the request with the `Payment-Signature` header.
+   - **MPP**: Extract the `WWW-Authenticate` header, create a credential with `mppx`, and retry the request with the `Payment` credential in the `Authorization` header.
+   - *(See the payment rule for your chosen protocol for additional details).*
+4. **Autonomous Execution & Settlement:** After the initial authorization, you may send subsequent off-chain signatures or vouchers automatically until the task is complete. When finished, ensure you settle the session (e.g., calling `session.close()`) to refund any unused deposits.
 
 ### 404 Not Found
 
