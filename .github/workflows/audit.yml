@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           pip install skill-audit
-          skill-audit ./skills/ --strict --format sarif -o results.sarif
+          skill-audit ./skills/ --format sarif -o results.sarif --strict
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
