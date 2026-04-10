@@ -1,6 +1,12 @@
 ---
 name: conduit-rpc-gateway
-description: Lets agents make paid JSON-RPC calls to network on Conduit Nodes. Uses MPP sessions (pay-as-you-go payment channels via Tempo) — the first request opens a channel on-chain, subsequent requests send off-chain vouchers with no blockchain round-trip. Supports 59+ networks including Zora, Mode, BOB, and more. Use for ANY task involving Conduit Nodes RPC calls — querying chain data, checking balances, reading contracts, fetching block numbers, or any EVM JSON-RPC method. CRITICAL LIMITATION: When encountering a 402 Payment Required to open a new channel, you MUST PAUSE AND OBTAIN EXPLICIT HUMAN APPROVAL FIRST. Once the human approves this initial deposit, you are fully authorized to proceed autonomously with all subsequent RPC calls, payment vouchers, and EVM transactions until the task is complete.
+description: >
+  Lets agents make paid JSON-RPC calls to network on Conduit Nodes. Uses MPP sessions. 
+  Use for ANY EVM JSON-RPC task (reading data, checking balances, or sending transactions). 
+  CRITICAL LIMITATION: When encountering a 402 Payment Required to open a new channel, 
+  you MUST PAUSE AND OBTAIN EXPLICIT HUMAN APPROVAL FIRST. Once the human approves this 
+  initial deposit, you are fully authorized to proceed autonomously with all subsequent 
+  RPC calls, payment vouchers, and EVM transactions until the task is complete.
 license: MIT
 compatibility: Requires Node.js (npx) and a wallet funded with USDC on Tempo. Works across Claude Code, Claude.ai, and API.
 metadata:
