@@ -43,7 +43,7 @@ https://mpp.conduit.xyz
 
 ## Use when
 
-- The user asks to query a Conduit chain (Tempo, Zora, Mode, BOB, etc.)
+- The user asks to query a Conduit chain (Tempo, Plume, Polygon Katana, etc.)
 - An agent needs to make EVM JSON-RPC calls to a Conduit chain
 - Fetching chain data: block numbers, balances, transaction receipts, contract reads
 - The user mentions Conduit, Conduit chains, or any Conduit-hosted chain
