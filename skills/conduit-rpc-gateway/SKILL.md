@@ -16,7 +16,7 @@ metadata:
 
 # Conduit RPC Proxy
 
-Paid JSON-RPC access to [Conduit](https://www.conduit.xyz) rollup networks using the [Machine Payments Protocol](https://mpp.dev/overview).
+Paid JSON-RPC access to [Conduit](https://www.conduit.xyz) chains using the [Machine Payments Protocol](https://mpp.dev/overview).
 
 All networks on the [Conduit Hub](https://hub.conduit.xyz) or configured as discoverable are supported. Each network is a paid route at `/:network-id`. Cost is **$0.00005** per JSON-RPC call.
 
@@ -43,11 +43,11 @@ https://mpp.conduit.xyz
 
 ## Use when
 
-- The user asks to query a Conduit rollup (Zora, Mode, BOB, etc.)
+- The user asks to query a Conduit chain (Tempo, Zora, Mode, BOB, etc.)
 - An agent needs to make EVM JSON-RPC calls to a Conduit chain
 - Fetching chain data: block numbers, balances, transaction receipts, contract reads
-- The user mentions Conduit, Conduit chains, or any Conduit-hosted rollup
-- The user needs RPC access to a rollup without running a node
+- The user mentions Conduit, Conduit chains, or any Conduit-hosted chain
+- The user needs RPC access to a chain without running a node
 
 ## Rules
 

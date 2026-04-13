@@ -16,7 +16,7 @@ Standard Ethereum JSON-RPC methods via the Conduit RPC Proxy. All requests are `
 
 **Base URL**: `https://mpp.conduit.xyz/:network-id`
 
-**Networks**: All networks on the [Conduit Hub](https://hub.conduit.xyz). Examples: `zora-mainnet-0`, `mode-mainnet-0`, `bob-mainnet-0`.
+**Networks**: All networks on the [Conduit Hub](https://hub.conduit.xyz). Examples: `tempo`, `zora-mainnet-0`, `mode-mainnet-0`, `bob-mainnet-0`.
 
 ---
 

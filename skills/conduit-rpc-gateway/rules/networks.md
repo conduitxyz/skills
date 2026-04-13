@@ -2,7 +2,7 @@
 
 ## Supported networks
 
-All networks listed on the [Conduit Hub](https://hub.conduit.xyz) or configured as discoverable are automatically supported. This includes 59+ networks such as Zora, Mode, BOB, Derive, and many more.
+All networks listed on the [Conduit Hub](https://hub.conduit.xyz) or configured as discoverable are automatically supported. This includes 59+ networks such as Tempo, Zora, Mode, BOB, Derive, and many more.
 
 For more on Conduit's RPC infrastructure, see the [Conduit RPC Nodes docs](https://docs.conduit.xyz/rpc-nodes/overview).
 
@@ -23,6 +23,8 @@ Where `:network-id` is the network's slug identifier. Examples:
 
 | Network            | Route                           |
 | ------------------ | ------------------------------- |
+| Tempo              | `/tempo`                        |
+| Tempo Testnet      | `/tempo-moderato`               |
 | Zora Mainnet       | `/zora-mainnet-0`               |
 | Mode Mainnet       | `/mode-mainnet-0`               |
 | BOB                | `/bob-mainnet-0`                |
