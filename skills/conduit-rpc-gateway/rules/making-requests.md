@@ -61,7 +61,8 @@ const receipt = await session.close()
 A single payment session can make calls across different networks:
 
 ```typescript
-await session.fetch(`${GATEWAY}/zora-mainnet-0`, { ... })  // opens channel
+await session.fetch(`${GATEWAY}/tempo`, { ... })           // opens channel
+await session.fetch(`${GATEWAY}/zora-mainnet-0`, { ... })  // voucher
 await session.fetch(`${GATEWAY}/mode-mainnet-0`, { ... })  // voucher
 await session.fetch(`${GATEWAY}/bob-mainnet-0`, { ... })   // voucher
 
