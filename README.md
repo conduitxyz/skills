@@ -33,3 +33,5 @@ These skills follow the [Agent Skills specification](https://agentskills.io/spec
 ## License
 
 MIT
+'
+'
