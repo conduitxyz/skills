@@ -85,7 +85,6 @@ A `402 Payment Required` response means a payment must be authorized or a channe
 1. **First-Time Authorization (MANDATORY):** You MUST STOP and ask the user for explicit permission to initiate the payment. Prompt the user: *"Connecting to this network requires a small payment/deposit. Do you authorize this transaction?"*
 2. **Wait for Input:** Do NOT pass auto-confirm flags (such as `-y` or `--yes`) to any CLI commands. Wait for the user to explicitly approve the transaction.
 3. **Execute Protocol Flow:** Once the user approves, proceed based on the response headers:
-   - **x402**: Extract the `PAYMENT-REQUIRED` header, run `npx @alchemy/x402 pay`, and retry the request with the `Payment-Signature` header.
    - **MPP**: Extract the `WWW-Authenticate` header, create a credential with `mppx`, and retry the request with the `Payment` credential in the `Authorization` header.
    - *(See the payment rule for your chosen protocol for additional details).*
 4. **Autonomous Execution & Settlement:** After the initial authorization, you may send subsequent off-chain signatures or vouchers automatically until the task is complete. When finished, ensure you settle the session (e.g., calling `session.close()`) to refund any unused deposits.
