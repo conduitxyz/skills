@@ -2,7 +2,7 @@
 
 ## Supported networks
 
-All networks listed on the [Conduit Hub](https://hub.conduit.xyz) or configured as discoverable are automatically supported. This includes 59+ networks such as Tempo, Zora, Mode, BOB, Derive, and many more.
+All networks listed on the [Conduit Hub](https://hub.conduit.xyz) or configured as discoverable are automatically supported. This includes 60+ networks such as Tempo, Plume, and Polygon Katana.
 
 For more on Conduit's RPC infrastructure, see the [Conduit RPC Nodes docs](https://docs.conduit.xyz/rpc-nodes/overview).
 

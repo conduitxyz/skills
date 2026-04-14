@@ -6,7 +6,7 @@ Agent Skills for integrating [Conduit](https://conduit.xyz) RPC infrastructure i
 
 ### `skills/conduit-rpc-gateway`
 
-Paid JSON-RPC access to all Conduit chains via the [Machine Payments Protocol](https://mpp.dev/overview). Supports 59+ networks including Tempo, Zora, Mode, BOB, and more.
+Paid JSON-RPC access to all Conduit chains via the [Machine Payments Protocol](https://mpp.dev/overview). Supports 60+ networks including Tempo, Plume, and Polygon Katana.
 
 - **Auth**: MPP session (pay-as-you-go payment channels via Tempo)
 - **Cost**: $0.00005 per JSON-RPC call
