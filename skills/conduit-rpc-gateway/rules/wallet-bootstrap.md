@@ -24,7 +24,9 @@ curl -fsSL https://tempo.xyz/install | bash
 tempo wallet login
 ```
 
-Once logged in, use `tempo request` to make paid calls. Proceed to [making-requests](making-requests.md).
+Once logged in, use `tempo request` to make paid calls. Each request may open a payment session that locks funds in escrow. When the user is done making queries, close sessions with `tempo wallet sessions close --all` to release unused funds. **Always ask the user before closing sessions** -- they may want to make more calls.
+
+Proceed to [making-requests](making-requests.md).
 
 ### If the user chose mppx
 

@@ -70,6 +70,26 @@ await session.fetch(`${GATEWAY}/bob-mainnet-0`, { ... })   // voucher
 await session.close()
 ```
 
+## Session management (Tempo Wallet CLI)
+
+When using the Tempo Wallet CLI (`tempo request`), payment sessions are managed separately from the request commands. After completing a batch of queries, **ask the user if they want to continue or close the session**.
+
+```bash
+# List active sessions
+tempo wallet sessions list
+
+# Sync local records with on-chain state
+tempo wallet sessions sync
+
+# Close all sessions (settles on-chain, refunds unused deposits)
+tempo wallet sessions close --all
+
+# Close only orphaned sessions
+tempo wallet sessions close --orphaned
+```
+
+**Do NOT close sessions without asking the user first.** The user may want to make additional calls using the same session.
+
 ## Error handling
 
 ```typescript
