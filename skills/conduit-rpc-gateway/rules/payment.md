@@ -50,6 +50,26 @@ const res2 = await session.fetch("https://mpp.conduit.xyz/mode-mainnet-0", {
 const receipt = await session.close();
 ```
 
+### Closing sessions with the Tempo Wallet CLI
+
+If using the Tempo Wallet CLI instead of the SDK, sessions are managed with `tempo wallet sessions`:
+
+```bash
+# List active sessions
+tempo wallet sessions list
+
+# Close all sessions (settles on-chain, refunds unused deposits)
+tempo wallet sessions close --all
+
+# Close only orphaned sessions (counterparty unreachable)
+tempo wallet sessions close --orphaned
+
+# Preview what would be closed without executing
+tempo wallet sessions close --all --dry-run
+```
+
+**Important:** Before closing sessions, ask the user if they want to make additional queries. Open sessions can be reused for more requests without opening a new channel.
+
 ## Payment receipt
 
 After a successful payment, the response includes a `Payment-Receipt` header:

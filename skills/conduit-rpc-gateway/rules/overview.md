@@ -25,7 +25,12 @@ Uses [mppx sessions](https://mpp.dev/guides/pay-as-you-go) (pay-as-you-go paymen
 
 After the first request, every subsequent request is just a signed voucher -- no gas, no block confirmation, instant.
 
-When done, call `session.close()` to settle on-chain. The server keeps the owed amount, and the unused deposit is refunded.
+When done, settle the session to release unused funds:
+
+- **SDK:** Call `session.close()`.
+- **Tempo Wallet CLI:** Run `tempo wallet sessions close --all`.
+
+The server keeps the owed amount, and the unused deposit is refunded. **Always ask the user before closing** -- they may want to make additional queries using the same session.
 
 ## Discovery
 

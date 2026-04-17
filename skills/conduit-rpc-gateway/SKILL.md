@@ -11,7 +11,7 @@ license: MIT
 compatibility: Requires Node.js (npx) and a wallet funded with USDC on Tempo. Works across Claude Code, Claude.ai, and API.
 metadata:
   author: conduitxyz
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Conduit RPC Proxy
@@ -87,7 +87,27 @@ A `402 Payment Required` response means a payment must be authorized or a channe
 3. **Execute Protocol Flow:** Once the user approves, proceed based on the response headers:
    - **MPP**: Extract the `WWW-Authenticate` header, create a credential with `mppx`, and retry the request with the `Payment` credential in the `Authorization` header.
    - *(See the payment rule for your chosen protocol for additional details).*
-4. **Autonomous Execution & Settlement:** After the initial authorization, you may send subsequent off-chain signatures or vouchers automatically until the task is complete. When finished, ensure you settle the session (e.g., calling `session.close()`) to refund any unused deposits.
+4. **Autonomous Execution & Settlement:** After the initial authorization, you may send subsequent off-chain signatures or vouchers automatically until the task is complete. When finished, you MUST settle the session to refund any unused deposits:
+   - **SDK users:** Call `session.close()`.
+   - **Tempo Wallet users:** Run `tempo wallet sessions close --all`.
+
+### Session Management (Tempo Wallet)
+
+When the user chose **Tempo Wallet** and you have completed a batch of RPC queries, you **MUST** follow this flow:
+
+1. **Ask the user** before closing the session. Prompt exactly:
+   > "I've completed the queries. Would you like to make more RPC calls, or should I close the payment session?"
+2. **If the user wants more queries**, continue making `tempo request` calls. The existing session stays open.
+3. **If the user is done**, close the session:
+   ```bash
+   tempo wallet sessions close --all
+   ```
+4. You can also inspect active sessions at any time:
+   ```bash
+   tempo wallet sessions list
+   ```
+
+**Do NOT close the session without asking the user first.** Open sessions lock deposited funds in escrow; closing releases the unused balance back to the wallet.
 
 ### 404 Not Found
 

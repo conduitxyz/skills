@@ -21,6 +21,26 @@ tempo request -X POST https://mpp.conduit.xyz/zora-mainnet-0 \
   -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
 ```
 
+### Session management
+
+Each `tempo request` call may open a payment session (a payment channel that locks funds in escrow). After completing a batch of queries, **ask the user** whether they want to continue or close the session.
+
+```bash
+# List active sessions
+tempo wallet sessions list
+
+# Sync local session state with on-chain state
+tempo wallet sessions sync
+
+# Close all sessions (refunds unused deposits)
+tempo wallet sessions close --all
+
+# Close only orphaned sessions (counterparty unreachable)
+tempo wallet sessions close --orphaned
+```
+
+**Do NOT close sessions without asking the user first.** Closing releases unused funds back to the wallet, but the user may want to make additional calls.
+
 ## Option 2: mppx CLI
 
 The `mppx` CLI is a lightweight MPP client bundled with the `mppx` package.
