@@ -10,30 +10,25 @@ npx mppx -X POST https://mpp.conduit.xyz/zora-mainnet-0 \
   -d '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
 ```
 
-## With the mppx SDK (tempo.session)
+## With the mppx SDK (tempo.session.manager)
 
-For programmatic access with explicit channel lifecycle control.
+For programmatic access with explicit channel lifecycle control. In mppx ≥ 0.7,
+the standalone session lives on `tempo.session.manager(...)` — calling
+`tempo.session({ client })` directly no longer returns a fetchable session.
 
 ```typescript
 import { tempo } from 'mppx/client'
-import { createClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
-import { tempo as tempoChain } from 'viem/chains'
 
 const GATEWAY = 'https://mpp.conduit.xyz'
 
 const account = privateKeyToAccount('0x...')
-const client = createClient({
-  account,
-  chain: tempoChain,
-  transport: http(),
-})
 
 // Create a payment session
 // maxDeposit: total locked into escrow (not per-request cost)
 // At $0.00005/request, 1 USDC covers ~20,000 requests
-const session = tempo.session({
-  client,
+const session = tempo.session.manager({
+  account,
   maxDeposit: '1',
 })
 
