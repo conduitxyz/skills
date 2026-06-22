@@ -48,21 +48,23 @@ The wallet needs USDC on Tempo to pay for RPC calls. At $0.00005 per request, 1 
 
 For building applications, use `viem` for wallet management and `mppx` for payments.
 
+> **New Sessions (mppx ≥ 0.7):** use `tempo.session.manager(...)` for direct
+> lifecycle control (`.fetch()`, `.topUp()`, `.close()`, `.cumulative`). The
+> older `tempo.session({ client })` shape no longer returns a fetchable
+> session — `tempo.session()` is now only a method you register inside
+> `Mppx.create({ methods: [...] })`. See [payment](payment.md) for details.
+
 ```typescript
 import { tempo } from 'mppx/client'
-import { createClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
-import { tempo as tempoChain } from 'viem/chains'
 
 const account = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`)
-const client = createClient({
-  account,
-  chain: tempoChain,
-  transport: http(),
-})
 
-const session = tempo.session({
-  client,
+// The manager opens a TIP-1034 reserve channel on the first request and signs
+// off-chain vouchers afterward. The server settles accepted usage on-chain
+// automatically; you only call close() to reclaim the unspent deposit.
+const session = tempo.session.manager({
+  account,
   maxDeposit: '1',
 })
 ```

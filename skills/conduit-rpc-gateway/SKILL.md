@@ -11,7 +11,7 @@ license: MIT
 compatibility: Requires Node.js (npx) and a wallet funded with USDC on Tempo. Works across Claude Code, Claude.ai, and API.
 metadata:
   author: conduitxyz
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Conduit RPC Proxy
