@@ -8,16 +8,18 @@ https://mpp.conduit.xyz
 
 ## Payment
 
-Uses [mppx sessions](https://mpp.dev/guides/pay-as-you-go) (pay-as-you-go payment channels via **Tempo**). Payments are in **USDC** on the Tempo blockchain.
+Uses [mppx sessions](https://mpp.dev/guides/pay-as-you-go) (pay-as-you-go payment channels via **Tempo**). Payments are in USD stablecoins on the Tempo blockchain.
 
+- Network: **Tempo mainnet** (chain ID `4217`) only
+- Accepted currencies: **USDC.e** (offered first) or **OUSD**. Both have 6 decimals. A channel uses one currency for its whole life.
 - Cost per request: **$0.00005**
-- Payment channel deposit: configurable via `maxDeposit` (default: 1 USDC)
-- At $0.00005/request, 1 USDC covers ~20,000 requests
+- Payment channel deposit: capped by `--max-spend` (Tempo CLI) or `maxDeposit` (SDK); the server suggests $0.50
+- At $0.00005/request, $1 covers ~20,000 requests
 
 ## Payment flow
 
 1. Client sends a JSON-RPC request to `/:network-id`
-2. Server returns `402 Payment Required` with `WWW-Authenticate: Payment`
+2. Server returns `402 Payment Required` with one `WWW-Authenticate: Payment` challenge per accepted currency (USDC.e first, then OUSD)
 3. Client opens a payment channel on-chain (first request only)
 4. Client sends a signed voucher with the request
 5. Server verifies and proxies the RPC request
@@ -27,8 +29,9 @@ After the first request, every subsequent request is just a signed voucher -- no
 
 When done, settle the session to release unused funds:
 
+- **Tempo Wallet CLI:** Run `tempo wallet sessions close https://mpp.conduit.xyz --cooperative --yes` (preview with `--dry-run` first).
+- **mppx CLI:** Run `npx mppx sessions close <channel-id>`.
 - **SDK:** Call `session.close()`.
-- **Tempo Wallet CLI:** Run `tempo wallet sessions close --all`.
 
 The server keeps the owed amount, and the unused deposit is refunded. **Always ask the user before closing** -- they may want to make additional queries using the same session.
 
