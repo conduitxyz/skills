@@ -117,11 +117,12 @@ When you have completed a batch of RPC queries, you **MUST** follow this flow:
    > "I've completed the queries. Would you like to make more RPC calls, or should I close the payment session?"
 2. **If the user wants more queries**, keep making calls. The existing session stays open and is reused.
 3. **If the user is done**, close only the Conduit session:
-   - **Tempo Wallet:** preview, then confirm (agent runs require `--yes`):
+   - **Tempo Wallet:** preview, then confirm (agent runs require `--yes`). With `--cooperative` the gateway settles the close at once and the unused deposit returns to the wallet:
      ```bash
      tempo wallet sessions close https://mpp.conduit.xyz --cooperative --dry-run
      tempo wallet sessions close https://mpp.conduit.xyz --cooperative --yes
      ```
+     The receipt after the first payment suggests closing by channel ID without `--cooperative`; that starts a grace period and needs `tempo wallet sessions close --finalize --yes` afterwards to withdraw.
    - **mppx CLI:** `npx mppx sessions list`, then `npx mppx sessions close <channel-id>`.
    - **SDK:** `await session.close()`.
 4. You can inspect sessions at any time with `tempo wallet sessions list` or `npx mppx sessions list`.
@@ -131,6 +132,10 @@ When you have completed a batch of RPC queries, you **MUST** follow this flow:
 ### `Payment network mismatch`
 
 The wallet is on Tempo testnet. The gateway only accepts payment on Tempo mainnet (chain ID `4217`). Pass `--network mainnet` to `tempo request`, or `--network mainnet` to `npx mppx`.
+
+### `Server did not offer payment token`
+
+`--payment-token` names a token the gateway doesn't accept. Rerun the `--dry-run` quote and pin the `symbol` it reports (USDC.e or OUSD).
 
 ### `E_LIMIT_EXCEEDED`
 

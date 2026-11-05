@@ -35,6 +35,8 @@ The login creates an **agent key** for this machine: the agent signs payments wi
 
 The Conduit gateway charges on **Tempo mainnet** (chain ID `4217`). Pass `--network mainnet` if the wallet's saved network is testnet.
 
+If `whoami` or a quote reports an expired key, run `tempo wallet refresh --network mainnet`. Like login, it prints a code and URL for the user to approve.
+
 Proceed to [making-requests](making-requests.md).
 
 ### If the user chose mppx

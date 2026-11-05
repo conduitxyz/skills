@@ -95,7 +95,7 @@ If using the Tempo Wallet CLI instead of the SDK, sessions are managed with `tem
 # List active sessions
 tempo wallet sessions list
 
-# Preview, then close the Conduit session through the gateway (no grace period)
+# Preview, then close the Conduit session through the gateway (settles at once, no grace period)
 tempo wallet sessions close https://mpp.conduit.xyz --cooperative --dry-run
 tempo wallet sessions close https://mpp.conduit.xyz --cooperative --yes
 
@@ -142,5 +142,6 @@ If a payment fails, the gateway returns 402 with the original challenge. Common 
 
 - **Insufficient balance** -- fund the wallet with more USDC.e, or pay in OUSD as described above
 - **`Payment network mismatch`** -- the client is on Tempo testnet. The gateway only accepts Tempo mainnet (chain ID `4217`); pass `--network mainnet`
+- **`Server did not offer payment token`** -- `--payment-token` names a token the gateway doesn't accept; pin the `symbol` from the `--dry-run` quote
 - **`E_LIMIT_EXCEEDED`** (Tempo CLI) -- over `--max-spend` or the agent key's limit. Ask the user before raising either
 - **Channel exhausted** -- the cumulative voucher amount exceeds the `maxDeposit`. Add headroom without closing the channel by calling `session.topUp('1')`, or close the session and open a new one with a larger deposit.
